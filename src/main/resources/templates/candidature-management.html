@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion des Candidatures</title>
+  <style>
+    :root {
+      --color-primary: #2c3e50;
+      --color-secondary: #34495e;
+      --color-accent: #3498db;
+      --color-accent-hover: #2980b9;
+      --color-background: #f4f4f4;
+      --color-card-bg: #ffffff;
+      --color-text: #333333;
+      --color-text-light: #ffffff;
+      --shadow-light: rgba(0, 0, 0, 0.1);
+      --shadow-dark: rgba(0, 0, 0, 0.2);
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--color-background);
+      color: var(--color-text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      color: var(--color-primary);
+      font-size: 2.5rem;
+    }
+
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      box-shadow: 0 4px 8px var(--shadow-light);
+      background-color: var(--color-card-bg);
+    }
+
+    table th, table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: var(--color-primary);
+      color: var(--color-text-light);
+    }
+
+    table tr:hover {
+      background-color: var(--color-accent-hover);
+    }
+
+    /* Liens */
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      color: var(--color-accent-hover);
+    }
+
+    /* Style des boutons d'acceptation et de refus */
+    .action-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .action-links a {
+      padding: 6px 12px;
+      background-color: var(--color-accent);
+      color: var(--color-text-light);
+      border-radius: 4px;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .action-links a.refuse {
+      background-color: #dc3545; /* Red for refusal */
+    }
+
+    .action-links a:hover {
+      opacity: 0.8;
+    }
+
+  </style>
+</head>
+<body>
+
+<h1>Liste des Candidatures</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Nom Candidat</th>
+    <th>Spécialité</th>
+    <th>État de la Candidature</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="candidature : ${candidatures}">
+    <td th:text="${candidature.candidat.nom}"></td>
+    <td th:text="${candidature.offre.spécialité}"></td>
+    <td th:text="${candidature.etat}"></td>
+    <td>
+      <div class="action-links">
+        <a th:href="@{/admin/candidatures/accepter/{id}(id=${candidature.id})}">Accepter</a>
+        <a class="refuse" th:href="@{/admin/candidatures/refuser/{id}(id=${candidature.id})}">Refuser</a>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

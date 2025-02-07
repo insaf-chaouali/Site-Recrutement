@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Détails de l'Offre</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    /* Variables de Couleurs */
+    :root {
+      --color-primary: #2c3e50;
+      --color-secondary: #34495e;
+      --color-accent: #3498db;
+      --color-accent-hover: #2980b9;
+      --color-background: #f4f4f4;
+      --color-card-bg: #ffffff;
+      --color-text: #333333;
+      --color-text-light: #ffffff;
+      --shadow-light: rgba(0, 0, 0, 0.1);
+      --shadow-dark: rgba(0, 0, 0, 0.2);
+    }
+
+    /* Corps de la page avec dégradé */
+    body {
+      background: linear-gradient(to right, #e0f7fa, #ffffff); /* Dégradé doux de bleu clair et blanc cassé */
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: var(--color-card-bg);
+      border-radius: 15px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      max-width: 900px;
+      width: 100%;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .container:hover {
+      transform: scale(1.03); /* Effet de légère mise en avant au survol */
+    }
+
+    h1 {
+      color: var(--color-primary); /* Bleu doux pour le titre */
+      font-size: 2.5rem;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+
+    h4 {
+      color: var(--color-primary); /* Bleu doux pour les sous-titres */
+      font-size: 1.3rem;
+      margin-top: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 15px;
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 20px;
+      color: var(--color-primary);
+    }
+
+    /* Style des champs de formulaire */
+    input[type="text"],
+    input[type="email"],
+    input[type="file"] {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #dcdcdc;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="file"]:focus {
+      border-color: var(--color-accent); /* Bleu clair au focus */
+      box-shadow: 0 0 10px rgba(52, 152, 219, 0.3); /* Effet de focus avec ombre douce */
+    }
+
+    /* Bouton Postuler avec effet */
+    button[type="submit"] {
+      background-color: var(--color-accent); /* Bleu doux */
+      color: var(--color-text-light);
+      border: none;
+      padding: 14px 30px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    button[type="submit"]:hover {
+      background-color: var(--color-accent-hover); /* Couleur légèrement plus foncée au survol */
+      transform: translateY(-2px); /* Légère animation de mouvement */
+    }
+
+    button[type="submit"]:active {
+      background-color: #013c70; /* Couleur active plus foncée */
+      transform: translateY(1px); /* Effet de clic */
+    }
+
+    /* Icone avant le champ de CV */
+    .icon {
+      margin-right: 10px;
+      font-size: 1.4rem;
+      color: var(--color-accent);
+    }
+
+    /* Espacement et alignement */
+    .text-center {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Détails de l'Offre</h1>
+  <div class="mb-4">
+    <h4>Mission :</h4>
+    <p th:text="${offre.mission}"></p>
+
+    <h4>Type de Contrat :</h4>
+    <p th:text="${offre.contrat}"></p>
+
+    <h4>Spécialité :</h4>
+    <p th:text="${offre.spécialité}"></p>
+
+    <h4>Ville de Travail :</h4>
+    <p th:text="${offre.villetravaille}"></p>
+
+    <h4>Expérience Requise :</h4>
+    <p th:text="${offre.experience}"></p>
+
+    <h4>Critère :</h4>
+    <p th:text="${offre.critere}"></p>
+
+    <h4>Salaire :</h4>
+    <p th:text="${offre.salaire}"></p>
+
+    <h4>Nombre de Recrutements :</h4>
+    <p th:text="${offre.nbrarecruter}"></p>
+  </div>
+
+  <form th:action="@{/candidats/offres/postuler/{id}(id=${offre.id})}" method="POST" enctype="multipart/form-data">
+    <label for="cvCandidat"><span class="icon">📄</span>CV :</label>
+    <input type="file" id="cvCandidat" name="cvCandidat" class="form-control" required>
+
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary">Postuler</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

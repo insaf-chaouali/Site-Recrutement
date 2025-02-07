@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestion des Offres</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>Admin</h2>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link active" href="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/admin/recruiters">Gestion des Recruteurs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/admin/offres">Gestion des Offres</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/candidatures">Gestion des Candidatures</a>
+        </li>
+    </ul>
+</div>
+
+<!-- Main Content -->
+<div class="content">
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Gestion des Offres</h1>
+
+        <!-- Zone de filtrage -->
+        <form th:action="@{/admin/offres}" method="get" class="d-flex mb-4">
+            <input type="text" name="keyword" class="form-control me-2" placeholder="Mot-clé" th:value="${keyword}">
+            <input type="text" name="secteur" class="form-control me-2" placeholder="Secteur" th:value="${secteur}">
+            <button type="submit" class="btn btn-primary">Filtrer</button>
+        </form>
+
+        <!-- Table des offres -->
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Mission</th>
+                <th>Contrat</th>
+                <th>Secteur</th>
+                <th>Salaire</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="offre : ${offres}">
+                <td th:text="${offre.id}"></td>
+                <td th:text="${offre.mission}"></td>
+                <td th:text="${offre.contrat}"></td>
+                <td th:text="${offre.secteur}"></td>
+                <td th:text="${offre.salaire}"></td>
+                <td>
+                    <a th:href="@{'/admin/offres/delete/' + ${offre.id}}" class="btn btn-danger btn-sm"
+                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre ?')">
+                        Supprimer
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

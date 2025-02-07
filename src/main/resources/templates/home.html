@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil Recruteur | TalentBloom</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #2c3e50;
+            --color-secondary: #34495e;
+            --color-accent: #3498db;
+            --color-accent-hover: #2980b9;
+            --color-background: #f4f4f4;
+            --color-card-bg: #ffffff;
+            --color-text: #333333;
+            --color-text-light: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-dark: rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            padding: 15px 30px;
+            box-shadow: 0 4px 8px var(--shadow-light);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-text-light);
+        }
+
+        .navbar .nav-links a {
+            color: var(--color-text-light);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .navbar .nav-links a:hover {
+            background-color: var(--color-accent-hover);
+            transform: scale(1.05);
+        }
+
+        .container {
+            margin: 100px auto 30px;
+            width: 90%;
+            max-width: 1000px;
+            background-color: var(--color-card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px var(--shadow-light);
+        }
+
+        .container h1 {
+            text-align: center;
+            color: var(--color-primary);
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .offre {
+            background-color: var(--color-card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px var(--shadow-light);
+            margin-bottom: 20px;
+            border-left: 5px solid var(--color-accent);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .offre:hover {
+            box-shadow: 0 4px 15px var(--shadow-dark);
+            transform: translateY(-5px);
+        }
+
+        .offre h3 {
+            color: var(--color-primary);
+            margin-top: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+<header class="navbar">
+    <div class="logo">TalentBloom Recruteur</div>
+    <nav>
+        <div class="nav-links">
+            <a href="/home">Accueil</a>
+            <a href="/offres/all">Voir les offres</a>
+            <a href="/admin/recruiters/candidatures">Voir les Candidature</a>
+            <a href="/logout">Déconnexion</a>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <h1>Bienvenue Recruteur</h1>
+    <div class="welcome-message">
+        <p>Gérez vos offres d'emploi et trouvez les meilleurs talents.</p>
+    </div>
+
+    <div th:each="offre : ${offres}" class="offre">
+        <h3 th:text="${offre.mission}">Titre de l'Offre</h3>
+        <p><strong>Contrat:</strong> <span th:text="${offre.contrat}"></span></p>
+        <p><strong>Ville:</strong> <span th:text="${offre.villetravaille}"></span></p>
+        <a th:href="@{'/offres/details/' + ${offre.id}}" class="details-button">Voir Détails</a>
+    </div>
+</div>
+
+<footer>
+    &copy; 2024 TalentBloom. Tous droits réservés.
+</footer>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Candidatures pour l'Offre</title>
+</head>
+<body>
+<h1>Candidatures pour cette Offre</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Nom du Candidat</th>
+    <th>Date de Postulation</th>
+    <th>État</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="candidature : ${candidatures}">
+    <td th:text="${candidature.id}"></td>
+    <td th:text="${candidature.candidate.nom}"></td>
+    <td th:text="${#dates.format(candidature.datePostulation, 'dd/MM/yyyy')}"></td>
+    <td th:text="${candidature.etat}"></td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

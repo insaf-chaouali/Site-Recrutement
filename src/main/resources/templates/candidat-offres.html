@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offres Disponibles | TalentBloom</title>
+  <style>
+    :root {
+      --color-primary: #3498db;
+      --color-secondary: #8e44ad;
+      --color-light: #ffffff;
+      --color-dark: #333;
+      --color-text: #2c3e50;
+      --shadow-light: rgba(0, 0, 0, 0.1);
+      --table-row-bg: #f8f9fa;
+      --table-row-alt-bg: #e9ecef;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+      color: var(--color-light);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      box-shadow: 0 15px 40px var(--shadow-light);
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+    }
+
+    .search-bar {
+      margin-bottom: 20px;
+    }
+
+    .search-bar input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      box-shadow: 0 2px 5px var(--shadow-light);
+    }
+
+    .table-responsive {
+      background: var(--color-light);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 10px 20px var(--shadow-light);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      color: var(--color-text);
+    }
+
+    th {
+      background: var(--color-secondary);
+      color: var(--color-light);
+      font-weight: bold;
+    }
+
+    tr {
+      background: var(--table-row-bg);
+    }
+
+    tr:nth-child(even) {
+      background: var(--table-row-alt-bg);
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 30px;
+      color: var(--color-light);
+      text-decoration: none;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .btn-info {
+      background: var(--color-dark);
+    }
+
+    .btn-info:hover {
+      background: #555;
+    }
+
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Les Offres Disponibles</h1>
+
+  <div th:if="${message != null}" class="alert alert-success">
+    <p th:text="${message}"></p>
+  </div>
+
+  <!-- Barre de recherche -->
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="Rechercher par mission..." onkeyup="filterOffers()">
+  </div>
+
+  <div class="table-responsive">
+    <table>
+      <thead>
+      <tr>
+        <th>Mission</th>
+        <th>Contrat</th>
+        <th>Spécialité</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody id="offersTableBody">
+      <tr th:each="offre : ${offres}">
+        <td th:text="${offre.mission}"></td>
+        <td th:text="${offre.contrat}"></td>
+        <td th:text="${offre.spécialité}"></td>
+        <td>
+          <a th:href="@{'/candidats/offres/details/' + ${offre.id}}" class="btn btn-info btn-sm">Détails</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  // Fonction pour filtrer les offres
+  function filterOffers() {
+    const input = document.getElementById('search');
+    const filter = input.value.toLowerCase();
+    const tableBody = document.getElementById('offersTableBody');
+
+    // Récupérer toutes les lignes du tableau
+    const rows = tableBody.getElementsByTagName('tr');
+
+    // Parcourir chaque ligne et masquer celles qui ne correspondent pas
+    for (let i = 0; i < rows.length; i++) {
+      const missionCell = rows[i].getElementsByTagName('td')[0]; // La première cellule est la mission
+      if (missionCell) {
+        const missionText = missionCell.textContent || missionCell.innerText; // Récupérer le texte
+        if (missionText.toLowerCase().indexOf(filter) > -1) {
+          rows[i].style.display = ""; // Afficher la ligne
+        } else {
+          rows[i].style.display = "none"; // Masquer la ligne
+        }
+      }
+    }
+  }
+</script>
+
+</body>
+</html>

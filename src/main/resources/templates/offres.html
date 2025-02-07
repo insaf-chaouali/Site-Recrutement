@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des Offres | TalentBloom</title>
+  <style>
+    :root {
+      --color-primary: #2c3e50;
+      --color-secondary: #34495e;
+      --color-accent: #3498db;
+      --color-accent-hover: #2980b9;
+      --color-background: #f4f4f4;
+      --color-card-bg: #ffffff;
+      --color-text: #333333;
+      --color-text-light: #ffffff;
+      --shadow-light: rgba(0, 0, 0, 0.1);
+      --shadow-dark: rgba(0, 0, 0, 0.2);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--color-background);
+      color: var(--color-text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+      padding: 15px 30px;
+      box-shadow: 0 4px 8px var(--shadow-light);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-text-light);
+    }
+
+    .navbar .nav-links a {
+      color: var(--color-text-light);
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 500;
+      text-transform: uppercase;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .navbar .nav-links a:hover {
+      background-color: var(--color-accent-hover);
+      transform: scale(1.05);
+    }
+
+    .container {
+      margin: 100px auto 20px auto;
+      width: 90%;
+      max-width: 1200px;
+      background-color: var(--color-card-bg);
+      border-radius: 12px;
+      box-shadow: 0 10px 20px var(--shadow-light);
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      color: var(--color-primary);
+      margin-bottom: 20px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      max-width: 500px;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--color-secondary);
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th {
+      background: var(--color-primary);
+      color: var(--color-text-light);
+    }
+
+    td:last-child {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    tr {
+      background: var(--color-background);
+      transition: background-color 0.3s ease;
+    }
+
+    tr:nth-child(even) {
+      background: var(--color-card-bg);
+    }
+
+    tr:hover {
+      background: var(--color-secondary);
+      color: var(--color-text-light);
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 5px 2px;
+      padding: 8px 16px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    .btn-warning {
+      background: #28a745;
+      color: var(--color-text-light);
+    }
+
+    .btn-danger {
+      background: #e74c3c;
+      color: var(--color-text-light);
+    }
+
+    .btn-primary {
+      background: var(--color-accent);
+      color: var(--color-text-light);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent-hover);
+      transform: scale(1.05);
+    }
+
+    .add-button a {
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+<!-- Barre de navigation -->
+<div class="navbar">
+  <div class="logo">TalentBloom</div>
+  <div class="nav-links">
+    <a href="/recruteurs/home">Accueil</a>
+  </div>
+</div>
+
+<!-- Contenu principal -->
+<div class="container">
+  <h1>Liste des Offres</h1>
+
+  <!-- Barre de recherche -->
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="Rechercher par spécialité..." onkeyup="filterOffers()">
+  </div>
+
+  <!-- Tableau des offres -->
+  <table>
+    <thead>
+    <tr>
+      <th>Mission</th>
+      <th>Contrat</th>
+      <th>Spécialité</th>
+      <th>Ville</th>
+      <th>Expérience</th>
+      <th>Critère</th>
+      <th>Salaire (€)</th>
+      <th>Recruteurs</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody id="offersTableBody">
+    <!-- Boucle Thymeleaf -->
+    <tr th:each="offre : ${offres}">
+      <td th:text="${offre.mission}"></td>
+      <td th:text="${offre.contrat}"></td>
+      <td th:text="${offre.spécialité}"></td>
+      <td th:text="${offre.villetravaille}"></td>
+      <td th:text="${offre.experience}"></td>
+      <td th:text="${offre.critere}"></td>
+      <td th:text="${offre.salaire}"></td>
+      <td th:text="${offre.nbrarecruter}"></td>
+      <td>
+        <a th:href="@{'/offres/edit/' + ${offre.id}}" class="btn btn-warning">Modifier</a>
+        <a th:href="@{'/offres/delete/' + ${offre.id}}" class="btn btn-danger"
+           onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre ?')">Supprimer</a>
+      </td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(offres)}">
+      <td colspan="9">Aucune offre disponible.</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Bouton Ajouter une Offre -->
+  <div class="add-button">
+    <a href="/offres/new" class="btn btn-primary">Ajouter une Offre</a>
+  </div>
+</div>
+
+<script>
+  function filterOffers() {
+    const input = document.getElementById('search').value.toLowerCase();
+    const rows = document.querySelectorAll('#offersTableBody tr');
+
+    rows.forEach(row => {
+      const cell = row.querySelector('td:nth-child(3)');
+      row.style.display = cell && cell.textContent.toLowerCase().includes(input) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>

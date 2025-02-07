@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accueil Candidats | TalentBloom</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Variables de Couleurs */
+    :root {
+      --color-primary: #2c3e50;
+      --color-secondary: #34495e;
+      --color-accent: #3498db;
+      --color-accent-hover: #2980b9;
+      --color-background: #f4f4f4;
+      --color-card-bg: #ffffff;
+      --color-text: #333333;
+      --color-text-light: #ffffff;
+      --shadow-light: rgba(0, 0, 0, 0.1);
+      --shadow-dark: rgba(0, 0, 0, 0.2);
+    }
+
+    /* Général */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--color-background);
+      color: var(--color-text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Barre de Navigation */
+    .navbar {
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+      padding: 15px 30px;
+      box-shadow: 0 4px 8px var(--shadow-light);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .navbar .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-text-light);
+    }
+
+    .navbar .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .navbar .nav-links li {
+      margin-left: 20px;
+    }
+
+    .navbar .nav-links a {
+      color: var(--color-text-light);
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 500;
+      text-transform: uppercase;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .navbar .nav-links a:hover {
+      background-color: var(--color-accent-hover);
+      transform: scale(1.05);
+    }
+
+    /* Conteneur Principal */
+    .container {
+      margin: 120px auto 30px;
+      width: 90%;
+      max-width: 1000px;
+      background-color: var(--color-card-bg);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px var(--shadow-light);
+    }
+
+    .container h1 {
+      text-align: center;
+      color: var(--color-primary);
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+    }
+
+    .welcome-message p {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* Cartes des Offres */
+    .offre {
+      background-color: var(--color-card-bg);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px var(--shadow-light);
+      margin-bottom: 20px;
+      border-left: 5px solid var(--color-accent);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .offre:hover {
+      box-shadow: 0 4px 15px var(--shadow-dark);
+      transform: translateY(-5px);
+    }
+
+    .offre h3 {
+      color: var(--color-primary);
+      margin-top: 0;
+      font-size: 1.6rem;
+    }
+
+    .offre p {
+      color: #555;
+      font-size: 1rem;
+      margin: 5px 0;
+    }
+
+    /* Boutons Détails */
+    .details-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: var(--color-accent);
+      color: var(--color-text-light);
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .details-button:hover {
+      background-color: var(--color-accent-hover);
+      transform: scale(1.05);
+    }
+
+    /* Pied de Page */
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      background-color: var(--color-primary);
+      color: var(--color-text-light);
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">TalentBloom</div>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="/home">Accueil</a></li>
+      <li><a href="/profil">Profil</a></li>
+      <li><a href="/logout">Déconnexion</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="container">
+  <h1>Bienvenue sur TalentBloom</h1>
+  <div class="welcome-message">
+    <p>Explorez nos offres d'emploi et créez votre profil pour maximiser vos chances de trouver l'emploi idéal.</p>
+  </div>
+
+  <div th:each="offre : ${offres}" class="offre">
+    <h3 th:text="${offre.mission}">Titre de l'Offre</h3>
+    <p><strong>Contrat:</strong> <span th:text="${offre.contrat}"></span></p>
+    <p><strong>Spécialité:</strong> <span th:text="${offre.spécialité}"></span></p>
+    <p><strong>Ville:</strong> <span th:text="${offre.villetravaille}"></span></p>
+    <p><strong>Salaire:</strong> <span th:text="${offre.salaire}"></span></p>
+    <p><strong>Critère:</strong> <span th:text="${offre.critere}"></span></p>
+    <a th:href="@{'/candidats/offres/details/' + ${offre.id}}" class="details-button">Voir Détails</a>
+  </div>
+</div>
+
+<footer>
+  &copy; 2024 TalentBloom. Tous droits réservés.
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Modification Offre</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+  <style>
+    :root {
+      --color-primary: #2c3e50;
+      --color-secondary: #34495e;
+      --color-accent: #3498db;
+      --color-accent-hover: #2980b9;
+      --color-background: #f4f4f4;
+      --color-card-bg: #ffffff;
+      --color-text: #333333;
+      --color-text-light: #ffffff;
+      --shadow-light: rgba(0, 0, 0, 0.1);
+      --shadow-dark: rgba(0, 0, 0, 0.2);
+    }
+
+    body {
+      background: linear-gradient(to right, var(--color-primary), var(--color-primary), var(--color-primary));
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--color-text);
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 10px 30px var(--shadow-light);
+      padding: 30px;
+    }
+
+    h3 {
+      text-align: center;
+      color: var(--color-primary);
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      color: var(--color-secondary);
+    }
+
+    .form-control {
+      border-radius: 20px;
+      border: 1px solid var(--color-secondary);
+    }
+
+    .btn {
+      border-radius: 20px;
+      padding: 10px 20px;
+    }
+
+    .btn-primary {
+      background-color: var(--color-accent);
+      border: none;
+      color: var(--color-text-light);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-accent-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--color-secondary);
+      border: none;
+      color: var(--color-text-light);
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a6268;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-control:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 5px var(--color-accent);
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="container my-5">
+  <h3>Modification Offre</h3>
+  <div class="card">
+    <div class="card-body">
+      <div class="col-md-10 mx-auto">
+        <form th:action="@{/offres/save}" th:object="${offre}" method="post">
+          <div class="row">
+            <!-- Mission -->
+            <div class="form-group col-md-12">
+              <label for="mission">Mission</label>
+              <input type="text" th:field="*{mission}" class="form-control" id="mission" placeholder="Ex. : Développement d'application" required />
+            </div>
+
+            <!-- Type de contrat -->
+            <div class="form-group col-md-12">
+              <label for="contrat">Type de Contrat</label>
+              <input type="text" th:field="*{contrat}" class="form-control" id="contrat" placeholder="Ex. : CDI, CDD" required />
+            </div>
+
+            <!-- Spécialité -->
+            <div class="form-group col-md-12">
+              <label for="specialite">Spécialité</label>
+              <input type="text" th:field="*{spécialité}" class="form-control" id="specialite" placeholder="Ex. : Développeur Full Stack" required />
+            </div>
+
+            <!-- Ville de travail -->
+            <div class="form-group col-md-12">
+              <label for="villetravaille">Ville de Travail</label>
+              <input type="text" th:field="*{villetravaille}" class="form-control" id="villetravaille" placeholder="Ex. : Paris, Lyon" required />
+            </div>
+
+            <!-- Expérience -->
+            <div class="form-group col-md-12">
+              <label for="experience">Expérience</label>
+              <input type="text" th:field="*{experience}" class="form-control" id="experience" placeholder="Ex. : 2-5 ans" required />
+            </div>
+
+            <!-- Critères -->
+            <div class="form-group col-md-12">
+              <label for="critere">Critères</label>
+              <textarea th:field="*{critere}" class="form-control" id="critere" placeholder="Ex. : Maîtrise des frameworks Spring et React" rows="3"></textarea>
+            </div>
+
+            <!-- Salaire -->
+            <div class="form-group col-md-12">
+              <label for="salaire">Salaire </label>
+              <input type="number" th:field="*{salaire}" class="form-control" id="salaire" placeholder="Ex. : 40000" step="0.01" required />
+            </div>
+
+            <!-- Nombre de recrutements -->
+            <div class="form-group col-md-12">
+              <label for="nbrarecruter">Nombre de Recrutements</label>
+              <input type="number" th:field="*{nbrarecruter}" class="form-control" id="nbrarecruter" placeholder="Ex. : 3" required />
+            </div>
+
+            <!-- Boutons -->
+            <div class="form-group col-md-12 d-flex justify-content-between">
+              <input type="submit" class="btn btn-primary" value="Mettre à jour">
+              <a th:href="@{/offres/all}" class="btn btn-secondary">Annuler</a>
+            </div>
+
+            <!-- Champ caché pour l'ID -->
+            <input type="hidden" th:field="*{id}">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>

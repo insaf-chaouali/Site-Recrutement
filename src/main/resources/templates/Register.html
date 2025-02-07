@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription | TalentBloom</title>
+  <style>
+    :root {
+      --color-primary: #3498db;
+      --color-secondary: #8e44ad;
+      --color-accent: #ff9f00;
+      --color-light: #ffffff;
+      --color-dark: #333;
+      --shadow-light: rgba(0, 0, 0, 0.1);
+      --shadow-dark: rgba(0, 0, 0, 0.2);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+      color: var(--color-light);
+    }
+
+    .container {
+      display: flex;
+      width: 90%;
+      max-width: 1100px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      box-shadow: 0 15px 40px var(--shadow-dark);
+      flex-direction: row;
+      overflow: hidden;
+    }
+
+    .left-section, .right-section {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .left-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .left-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .left-section p {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .left-section a {
+      color: var(--color-accent);
+      text-decoration: none;
+      font-size: 1.1rem;
+      margin-top: 20px;
+      font-weight: bold;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .left-section a:hover {
+      color: #f39c12;
+      transform: translateX(4px);
+    }
+
+    .right-section {
+      background: var(--color-light);
+      color: var(--color-dark);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px var(--shadow-light);
+    }
+
+    .right-section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .right-section a {
+      display: block;
+      width: 80%;
+      max-width: 300px;
+      background: var(--color-primary);
+      color: var(--color-light);
+      padding: 15px;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 30px;
+      margin: 10px 0;
+      text-decoration: none;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .right-section a:hover {
+      background: #007acc;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        margin: 10px;
+      }
+
+      .left-section, .right-section {
+        padding: 20px;
+      }
+
+      .left-section h2, .right-section h2 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- Partie gauche -->
+  <div class="left-section">
+    <h2>Rejoignez TalentBloom</h2>
+    <p>TalentBloom vous aide à trouver des opportunités professionnelles en Tunisie, sans frais d'inscription.</p>
+    <p><strong>Recruteurs :</strong> Publiez vos offres d'emploi et trouvez les meilleurs talents en Tunisie.</p>
+    <p><strong>Candidats :</strong> Créez un CV optimisé, trouvez des offres qui vous correspondent et démarquez-vous.</p>
+    <p><strong>Entreprises :</strong> Collaborez avec les entreprises leaders pour faire avancer votre carrière.</p>
+  </div>
+
+  <!-- Partie droite -->
+  <div class="right-section" role="form" aria-label="Formulaire d'inscription">
+    <h2>Inscrivez-vous maintenant</h2>
+    <a th:href="@{/candidats/afficher}" class="cta">S'inscrire en tant que Candidat</a>
+
+  <a th:href="@{/recruteurs/afficher}" class="cta">S'inscrire en tant que Recruteur</a>
+
+  </div>
+</div>
+</body>
+</html>
