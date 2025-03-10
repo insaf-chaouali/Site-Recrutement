@@ -1,0 +1,329 @@
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Comopatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&family=Nunito&display=swap" rel="stylesheet">
+       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+       <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+
+        <title>Responsive Job Portal Website </title>
+    </head>
+    <body>
+<nav class="navbar">
+    <h2 class="navbar-logo"><a href="#">TALENTBLOOM</a></h2>
+    <div class="navbar-menu">
+        <a href="index.html">Home</a>
+        <a href="../connexion/signup.html">Sing Up</a>
+        <a href="#">Job Listings</a>
+        <a href="../connexion/signin.html">Sign In</a>
+
+             </div>
+             <div class="menu-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+             </div>
+
+</nav>
+<header>
+    <h1 class="header-title">
+        Find YOUR<span>PERFECT Job</span><br>EASILY</br>
+    </h1>
+</header>
+<div class="search-wrapper">
+    <form action="/search" method="GET">
+        <div class="search-box">
+            <div class="search-card">
+                <input class="search-input" type="text" name="titre" placeholder="Job title or keywords">
+                <button class="search-button" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+    
+</div>
+<section class="job-list" id="jobs">
+    <!-- Job Card 1 -->
+    <div class="job-card">
+        <div class="job-name">
+            <img class="job-profile" src="../images/ooredoo.png">
+            <div class="job-detail">
+                <h4>Ooredoo Tunisia</h4>
+                <h3>Network Engineer</h3>
+                <p>Manage and optimize network performance, troubleshooting issues.</p>
+            </div>
+        </div>
+        <div class="job-label">
+            <a class="label-a" href="#">Networking</a>
+            <a class="label-b" href="#">Linux</a>
+            <a class="label-c" href="#">Communication</a>
+        </div>
+        <div class="job-posted">
+            Posted 5 hours ago
+        </div>
+    </div>
+
+    <!-- Job Card 2 -->
+    <div class="job-card">
+        <div class="job-name">
+            <img class="job-profile" src="../images/vermeg.png">
+            <div class="job-detail">
+                <h4>Vermeg Tunisia</h4>
+                <h3>Software Developer</h3>
+                <p>Design and develop financial software solutions tailored to client needs.</p>
+            </div>
+        </div>
+        <div class="job-label">
+            <a class="label-a" href="#">Java</a>
+            <a class="label-b" href="#">Spring Boot</a>
+            <a class="label-c" href="#">SQL</a>
+        </div>
+        <div class="job-posted">
+            Posted 1 day ago
+        </div>
+    </div>
+
+    <!-- Job Card 3 -->
+    <div class="job-card">
+        <div class="job-name">
+            <img class="job-profile" src="../images/Logo_biat_2019.jpg">
+            <div class="job-detail">
+                <h4>BIAT Bank</h4>
+                <h3>Business Analyst</h3>
+                <p>Analyze business processes and suggest solutions to improve efficiency.</p>
+            </div>
+        </div>
+        <div class="job-label">
+            <a class="label-a" href="#">Finance</a>
+            <a class="label-b" href="#">Data Analysis</a>
+            <a class="label-c" href="#">Excel</a>
+        </div>
+        <div class="job-posted">
+            Posted 2 days ago
+        </div>
+    </div>
+
+    <!-- Job Card 4 -->
+    <div class="job-card">
+        <div class="job-name">
+            <img class="job-profile" src="../images/telenet.jpg">
+            <div class="job-detail">
+                <h4>Telnet Holding</h4>
+                <h3>Embedded Systems Engineer</h3>
+                <p>Develop innovative IoT projects and embedded systems for industrial clients.</p>
+            </div>
+        </div>
+        <div class="job-label">
+            <a class="label-a" href="#">C/C++</a>
+            <a class="label-b" href="#">IoT</a>
+            <a class="label-c" href="#">Microcontrollers</a>
+        </div>
+        <div class="job-posted">
+            Posted 3 days ago
+        </div>
+    </div>
+
+    <!-- Job Card 5 -->
+    <div class="job-card">
+        <div class="job-name">
+            <img class="job-profile" src="../images/steg.png">
+            <div class="job-detail">
+                <h4>STEG (Tunisian Electricity and Gas)</h4>
+                <h3>Energy Analyst</h3>
+                <p>Analyze energy consumption and recommend optimization strategies.</p>
+            </div>
+        </div>
+        <div class="job-label">
+            <a class="label-a" href="#">Energy</a>
+            <a class="label-b" href="#">Data Analytics</a>
+            <a class="label-c" href="#">Reporting</a>
+        </div>
+        <div class="job-posted">
+            Posted 5 days ago
+        </div>
+    </div>
+    <button class="job-more" >View More Listings</button></a>
+</section>
+
+<section class="join">
+    <div  class="join-detail">
+        <h1 class="join-detail">LETS START YOUR NEW JOB WITH US</h1>
+        <p>Our team is growing, and we’re searching for talented individuals to help shape the future. Get ready to grow with us!</p>
+    </div>
+    <button class="join-button" onclick="window.location.href='your-link-here'">Join Now</button>
+
+</section>
+<section class="featured" id="companies"> 
+    <h1 class="section-title"> Featured Companies</h1>
+    <p>Ready to join a great company? Check out some of the most exciting job opportunities from top global brands!</p>
+    <div class="featured-wrapper">
+        <!-- Featured Card for Tunisie Telecom -->
+        <div class="featured-card">
+            <img class="featured-image" src="../images/TT.jpg" alt="Tunisie Telecom Logo">
+            <p>Tunisie Telecom</p>
+            <button class="featured-button">View 2 jobs</button>
+        </div>
+    
+        <!-- Featured Card for Ooredoo Tunisia -->
+        <div class="featured-card">
+            <img class="featured-image" src="../images/OOREDOO5G.jpg" alt="Ooredoo Tunisia Logo">
+            <p>Ooredoo Tunisia</p>
+            <button class="featured-button">View 2 jobs</button>
+        </div>
+    
+        <!-- Featured Card for Orange Tunisia -->
+        <div class="featured-card">
+            <img class="featured-image" src="../images/Orange.jpg" alt="Orange Tunisia Logo">
+            <p>Orange Tunisia</p>
+            <button class="featured-button">View 2 jobs</button>
+        </div>
+    
+        <!-- Featured Card for Attijari Bank -->
+        <div class="featured-card">
+            <img class="featured-image" src="../images/LOGO-ATTIJARI-BANK-pdf.jpg" alt="Attijari Bank Logo">
+            <p>Attijari Bank</p>
+            <button class="featured-button">View 2 jobs</button>
+        </div>
+    
+        <!-- Featured Card for Société Tunisienne de l'Électricité et du Gaz (STEG) -->
+        <div class="featured-card">
+            <img class="featured-image" src="../images/URICA-STEG.jpg" alt="STEG Logo">
+            <p>STEG</p>
+            <button class="featured-button">View 2 jobs</button>
+        </div>
+    
+        <!-- Featured Card for Alstom Tunisia -->
+        <div class="featured-card">
+            <img class="featured-image" src="../images/Alstom.jfif" alt="Alstom Tunisia Logo">
+            <p>Alstom Tunisia</p>
+            <button class="featured-button">View 2 jobs</button>
+        </div>
+ 
+</section>
+<section class="testimoni" id="testimoni">
+    <h1 class="section-title">Testimonial</h1>
+    <p>Let's see what our clients say about us</p>
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <i class="fas fa-quote-left"></i>
+                <h3>"This platform helped me connect with the best talent in Tunisia. The process was smooth and efficient!"</h3>
+                <div class="testimoni-pic">
+                    <img src="../images/homme.jpg" alt="Ali Ben Ali">
+                    <p>Ali Ben Ali</p>
+                    <span>HR Manager</span>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-quote-left"></i>
+                <h3>"I found the perfect candidate for our business needs in just a few days. Amazing experience!"</h3>
+                <div class="testimoni-pic">
+                    <img src="../images/sophie.jfif" alt="Amina Rami">
+                    <p>Amina Rami</p>
+                    <span>CEO</span>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-quote-left"></i>
+                <h3>"The platform is user-friendly and helped us quickly find skilled professionals. Highly recommend!"</h3>
+                <div class="testimoni-pic">
+                    <img src="../images/Ahmed.jpg" alt="Ahmed Zahrani">
+                    <p>Ahmed Zahrani</p>
+                    <span>Marketing Director</span>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <i class="fas fa-quote-left"></i>
+                <h3>"Excellent service, made recruitment easy and straightforward. Will use it again!"</h3>
+                <div class="testimoni-pic">
+                    <img src="../images/marie.jfif" alt="Mona Chouchane">
+                    <p>Mona Chouchane</p>
+                    <span>Operations Manager</span>
+                    </div>
+                </div>
+             </div>
+            
+    <div class="swiper-pagination"></div>
+</div>
+</section>
+    <section class="blog" id="blog">
+        <h1 class="section-title">Career Advices</h1>
+        <p>learn more career tips from company's recruiter</p>
+        <div class="blog-wrapper">
+            <div class="blog-card">
+                <img class="blog-image" src="../images/enjoywork.jpg">
+                <div class="blog-detail">
+                    <span>30 Nov 2024</span>
+                    <h4>how to enjoy your work</h4>
+                    <p> Find job satisfaction and stay motivated.</p>
+                    <hr class="divider">
+                    <a href="#" class="blog-more">Read more</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img class="blog-image" src="../images/10tips.avif">
+                <div class="blog-detail">
+                    <span>30 Nov 2024</span>
+                    <h4>10 tips for technical interview</h4>
+                    <p> Prepare for coding challenges and interviews.</p>
+                    <hr class="divider">
+                    <a href="#" class="blog-more">Read more</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img class="blog-image" src="../images/managing.jfif">
+                <div class="blog-detail">
+                    <span>30 Nov 2024</span>
+                    <h4>Managing Time Effectively</h4>
+                    <p> Boost productivity and reduce stress.</p>
+                    <hr class="divider">
+                    <a href="#" class="blog-more">Read more </a>
+              </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-wrapper">
+            <h3>TALENTBLOOM</h3>
+            <p>Empowering your career journey by offering top job opportunities and expert career advice</p>
+            <div class="social-media">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-wrapper">
+            <h4>Explore</h4>
+            <a href="#">Top Companies</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Podcast</a>
+            <a href="#">Careers</a>
+        </div>
+        <div class="footer-wrapper">
+            <h4>About</h4>
+            <a href="#">FAQ</a>
+            <a href="#">Get Inspired</a>
+            <a href="#">Blog</a>
+        </div>
+        <div class="footer-wrapper">
+            <h4>Support</h4>
+            <a href="#">Customer Service</a>
+            <a href="#">Trust & Safety</a>
+            <a href="#">Partnership</a>
+        </div>
+        <div class="footer-wrapper">
+            <h4>Community</h4>
+            <a href="#">Community</a>
+            <a href="#">Invite a Friend</a>
+            <a href="#">Event</a>
+        </div>
+        
+    </footer>
+
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="app.js"></script>
+    </body>
+</html>

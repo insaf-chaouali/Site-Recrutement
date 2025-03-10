@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create an account on TalentBloom to access our services.">
+    <title>Create an Account - TalentBloom</title>
+    <link rel="stylesheet" href="loginstyle.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+<div class="wrapper">
+    <!-- Navigation Bar -->
+    <nav class="nav" id="navbar">
+        <div class="nav-logo">
+            <p>TALENTBLOOM</p>
+        </div>
+        <div class="nav-menu">
+            <ul>
+                <li><a href="../HomePrincipal/index.html" class="link">Home</a></li>
+                <li><a href="/blog" class="link">Blog</a></li>
+                <li><a href="/services" class="link">Services</a></li>
+                <li><a href="/about" class="link">About</a></li>
+            </ul>
+        </div>
+        <div class="nav-button">
+            <button class="btn" id="loginBtn" onclick="window.location.href='login.html'">Sign In</button>
+        </div>
+
+        <div class="nav-menu-btn">
+            <i class="bx bx-menu"></i>
+        </div>
+    </nav>
+
+    <!-- Registration Form -->
+    <div class="form-box">
+        <div class="register-container">
+            <header>
+                <h1>Create an Account</h1>
+            </header>
+
+            <!-- Error Message Section -->
+            <div th:if="${error}" class="error-message">
+                <p th:text="${error}"></p>
+            </div>
+
+            <form th:action="@{/signup1}" method="post" th:object="${signupRequest}" id="signupForm">
+                <!-- CSRF Token
+                <input type="hidden" name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+
+                <!-- Form Fields -->
+
+                <div class="input-box">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="UserName" name="UserName" th:field="*{username}" required aria-required="true" class="input-field"/>
+                </div>
+                <div class="input-box">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required aria-required="true" th:field="*{email}"class="input-field" />
+                </div>
+                <div class="input-box">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required aria-required="true"th:field="*{password}" class="input-field" />
+                </div>
+                <div class="input-box">
+                    <label for="role">Role</label>
+                    <select id="role" name="role" required aria-required="true" class="input-field select-field">
+                        <option value="recruiter">Recruiter</option>
+                        <option value="candidate">Candidate</option>
+                        <option th:if="${user.role == 'Admin'}" value="Admin" hidden>Admin</option>
+
+                    </select>
+                </div>
+                <!-- Fields specific to Recruiter -->
+                <div id="recruiterFields" class="role-fields" style="display: none;">
+                    <div class="input-box">
+                        <label for="companyName">Nom d'entreprise</label>
+                        <input type="text" id="companyName" name="companyName" class="input-field" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="activitySector">Secteur d'activité</label>
+                        <input type="text" id="activitySector" name="activitySector" class="input-field" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="lastName">Nom</label>
+                        <input type="text" id="lastName" name="lastName" class="input-field" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="firstName">Prénom</label>
+                        <input type="text" id="firstName" name="firstName" class="input-field" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="birthDate">Date de naissance</label>
+                        <input type="date" id="birthDate" name="birthDate" class="input-field" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="phoneNumber">Numéro de téléphone</label>
+                        <input type="tel" id="phoneNumber" name="phoneNumber" class="input-field" required>
+                    </div>
+                </div>
+
+                <!-- Fields specific to Candidate -->
+                <div id="candidateFields" class="role-fields" style="display: none;">
+                    <div class="input-box">
+                        <label for="cvLink">CV Link</label>
+                        <input type="url" id="cvLink" name="cvLink" class="input-field">
+                    </div>
+                    <div class="input-box">
+                        <label for="skills">Skills</label>
+                        <input type="text" id="skills" name="skills" class="input-field">
+                    </div>
+                </div>
+                <div class="two-col">
+                    <div class="one">
+                        <input type="checkbox" id="register-check">
+                        <label for="register-check"> Remember Me </label>
+                    </div>
+                    <div class="two">
+                        <label><a href="/terms" target="_blank">Terms & Conditions</a></label>
+                    </div>
+                </div>
+                <button type="submit" class="submit" id="submitBtn">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 TalentBloom</p>
+    </footer>
+</div>
+
+<script>
+    // Client-side form validation
+    document.getElementById("signupForm").addEventListener("submit", function (e) {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        // Simple email validation
+        if (!email.includes("@")) {
+            e.preventDefault();
+            alert("Please enter a valid email address.");
+            return;
+        }
+
+        // Password strength check
+        if (password.length < 8) {
+            e.preventDefault();
+            alert("Password must be at least 8 characters long.");
+        }
+    });
+
+    // Prevent multiple submissions
+    document.getElementById("submitBtn").addEventListener("click", function () {
+        this.disabled = true;
+        this.innerText = "Submitting...";
+    });
+    document.getElementById("role").addEventListener("change", function () {
+        const recruiterFields = document.getElementById("recruiterFields");
+        const candidateFields = document.getElementById("candidateFields");
+
+        // Reset visibility
+        recruiterFields.style.display = "none";
+        candidateFields.style.display = "none";
+
+        // Display fields based on selected role
+        if (this.value === "recruiter") {
+            recruiterFields.style.display = "block";
+        } else if (this.value === "candidate") {
+            candidateFields.style.display = "block";
+        }
+    });
+</script>
+</body>
+</html>

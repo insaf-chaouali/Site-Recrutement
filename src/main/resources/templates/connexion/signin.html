@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign in to your TalentBloom account to access our services.">
+    <title>Sign In - TalentBloom</title>
+    <link rel="stylesheet" href="loginstyle.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+<div class="wrapper">
+    <!-- Navigation Bar -->
+    <nav class="nav" id="navbar">
+        <div class="nav-logo">
+            <p>TALENTBLOOM</p>
+        </div>
+        <div class="nav-menu">
+            <ul>
+                <li><a href="../HomePrincipal/index.html" class="link">Home</a></li>
+                <li><a href="/blog" class="link">Blog</a></li>
+                <li><a href="/services" class="link">Services</a></li>
+                <li><a href="/about" class="link">About</a></li>
+            </ul>
+        </div>
+        <div class="nav-button">
+            <button class="btn" id="loginBtn" onclick="window.location.href='login.html'">Sign In</button>
+            <button class="btn" id="registerBtn" onclick="window.location.href='register.html'">Sign Up</button>
+        </div>
+        <div class="nav-menu-btn">
+            <i class="bx bx-menu"></i>
+        </div>
+    </nav>
+
+    <!-- Sign In Form -->
+    <div class="form-box">
+        <div class="register-container">
+            <header>
+                <h1>Sign In to Your Account</h1>
+            </header>
+
+            <!-- Error Message Section -->
+            <div th:if="${error}" class="error-message">
+                <p th:text="${error}"></p>
+            </div>
+
+            <form th:action="@{/api/auth/signin}" method="post" id="signinForm">
+                <!-- CSRF Token -->
+                <input type="hidden" name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                <!-- Form Fields -->
+                <div class="input-box">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required aria-required="true" class="input-field" placeholder="Enter your email">
+                </div>
+                <div class="input-box">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required aria-required="true" class="input-field" placeholder="Enter your password">
+                </div>
+                <div class="two-col">
+                    <div class="one">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe"> Remember Me </label>
+                    </div>
+                    <div class="two">
+                        <label><a href="/terms" target="_blank">Terms & Conditions</a></label>
+                    </div>
+                </div>
+                <button type="submit" class="submit" id="submitBtn">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 TalentBloom</p>
+    </footer>
+</div>
+
+<script>
+    // Client-side form validation
+    document.getElementById("signinForm").addEventListener("submit", function (e) {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        // Simple email validation
+        if (!email.includes("@")) {
+            e.preventDefault();
+            alert("Please enter a valid email address.");
+            return;
+        }
+
+        // Password check (you could add more specific rules here if needed)
+        if (password.length < 8) {
+            e.preventDefault();
+            alert("Password must be at least 8 characters long.");
+        }
+    });
+
+    // Prevent multiple submissions
+    document.getElementById("submitBtn").addEventListener("click", function () {
+        this.disabled = true;
+        this.innerText = "Submitting...";
+    });
+</script>
+</body>
+</html>
